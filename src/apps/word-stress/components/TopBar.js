@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#f9fafd",
     fontFamily: "Montserrat",
     fontWeight: "600",
-    fontSize: "1.2rem",
+    fontSize: "1.5rem",
     textDecoration: "none",
 
     transition: theme.transitions.create(["color"], {

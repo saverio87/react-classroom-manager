@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import firebase from "../../firebase";
 import { Word } from "./Word";
+import Loader from "react-loader-spinner";
+
 import TabPanel from "./TabPanel";
 import { makeStyles } from "@material-ui/core/styles";
-import { Box, Container, Grid, Paper } from "@material-ui/core";
+import { Container, Grid } from "@material-ui/core";
 import { StyledPaper, StyledPaperText } from "./components/StyledComponents";
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +46,11 @@ export const WordGrid = () => {
   };
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return (
+      <Grid container justify="center" alignItems="center">
+        <Loader type="ThreeDots" color="steelblue" height={120} width={120} />
+      </Grid>
+    );
   }
 
   return (
