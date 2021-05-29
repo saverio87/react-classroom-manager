@@ -4,6 +4,7 @@ import { Grid } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
+import Speech from "react-speech";
 
 import { StyledPaper, StyledPaperText } from "./components/StyledComponents";
 
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
       duration: "0.2s",
     }),
     "&:hover": {
-      color: "steelblue",
+      color: "lightsteelblue",
       fontSize: "9rem",
       cursor: "pointer",
     },
@@ -95,6 +96,7 @@ export const Word = ({ word, goBack }) => {
         justify="center"
         alignItems="center"
       >
+        <Speech text={word.word} />
         <FontAwesomeIcon
           onClick={goBack}
           className={classes.icon}

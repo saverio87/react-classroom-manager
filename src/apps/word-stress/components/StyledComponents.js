@@ -18,7 +18,7 @@ const MyStyledPaper = styled(Paper)((props) => ({
   //   duration: "0.2s",
   // }),
   "&:hover": {
-    backgroundColor: "whitesmoke",
+    backgroundColor: "ghostwhite",
     cursor: "pointer",
   },
 }));

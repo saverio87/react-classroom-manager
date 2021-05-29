@@ -4,11 +4,14 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { SnackbarProvider } from "notistack";
+import { ClassroomHelperProvider } from "./apps/classroom-helper/context/helperContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <SnackbarProvider maxSnack={3}>
-      <App />
+      <ClassroomHelperProvider>
+        <App />
+      </ClassroomHelperProvider>
     </SnackbarProvider>
   </React.StrictMode>,
   document.getElementById("root")
