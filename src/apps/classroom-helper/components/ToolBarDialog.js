@@ -46,7 +46,14 @@ import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import MuiDialogContent from "@material-ui/core/DialogContent";
 import MuiDialogActions from "@material-ui/core/DialogContent";
 
-import { StyledButton } from "./StyledComponents";
+// Styled components
+
+import {
+  StyledButton,
+  DialogHeader,
+  DialogContent,
+  DialogClose,
+} from "./StyledComponents";
 import { LineBreak } from "../../word-stress/components/StyledComponents";
 
 const useStyles = makeStyles((theme) => ({
@@ -83,8 +90,9 @@ const useStyles = makeStyles((theme) => ({
   },
   addClassInput: {
     fontSize: "2rem",
-    color: "darkgrey",
+    color: "#7a6eaa",
     fontWeight: "400",
+    lineHeight: "2.2rem",
   },
 
   header: {
@@ -215,7 +223,7 @@ export default function StyledDialog(props) {
       case "timer":
         return timer;
       case "task":
-        return task;
+        return addTask;
       case "grouping":
         return groups;
       case "add-note":
@@ -229,41 +237,24 @@ export default function StyledDialog(props) {
 
   const groups = (
     <>
-      <MuiDialogTitle
-        style={{ backgroundColor: "green" }}
-        className={classes.header}
-        onClose={closeDialog}
-      >
-        <IconButton
-          aria-label="close"
-          className={classes.backButton}
-          onClick={closeDialog}
-        >
-          <CloseIcon style={{ fontSize: "2rem" }} />
-        </IconButton>
-        <Typography align="center" className={classes.headerText}>
-          <GroupIcon style={{ fontSize: "5rem" }} />
-        </Typography>
-        <Typography align="center" className={classes.headerText}>
-          Group students
-        </Typography>
-      </MuiDialogTitle>
+      <DialogHeader onClose={closeDialog}>
+        <DialogClose onClick={closeDialog} />
+        <div>
+          <GroupIcon className="icon" />
+        </div>
+        <div className="title">Group students</div>
+      </DialogHeader>
 
-      <MuiDialogContent className={classes.body}>
-        <Typography
-          style={{ padding: "1rem" }}
-          align="center"
-          className={classes.mainText}
-        >
-          How many students per group?
-        </Typography>
-
-        <Typography style={{ padding: "1rem" }}>
+      <DialogContent>
+        <div className="main">How many students per group?</div>
+        <LineBreak />
+        <LineBreak />
+        <Typography>
           <Grid container spacing={2} justify="center">
             {[2, 3, 4, 5, 6].map((studentsPerGroup) => (
               <Grid item xs={2}>
                 <Paper
-                  elevation={1}
+                  variant="outlined"
                   className={classes.paperitem}
                   onClick={function (e) {
                     console.log(students);
@@ -278,31 +269,19 @@ export default function StyledDialog(props) {
             ))}
           </Grid>
         </Typography>
-      </MuiDialogContent>
+      </DialogContent>
     </>
   );
 
   const addClass = (
     <>
-      <MuiDialogTitle
-        style={{ backgroundColor: "#43b3f8" }}
-        className={classes.header}
-        onClose={closeDialog}
-      >
-        <IconButton
-          aria-label="close"
-          className={classes.backButton}
-          onClick={closeDialog}
-        >
-          <CloseIcon style={{ fontSize: "2rem" }} />
-        </IconButton>
-        <Typography align="center" className={classes.headerText}>
-          <SupervisedUserCircleIcon style={{ fontSize: "7rem" }} />
-        </Typography>
-        <Typography align="center" className={classes.headerText}>
-          Create a new classroom
-        </Typography>
-      </MuiDialogTitle>
+      <DialogHeader onClose={closeDialog}>
+        <DialogClose onClick={closeDialog} />
+
+        <SupervisedUserCircleIcon className="icon" />
+
+        <div className="title">Create a new classroom</div>
+      </DialogHeader>
 
       <MuiDialogContent className={classes.body}>
         <Typography className={classes.addClassSection}>
@@ -369,36 +348,16 @@ export default function StyledDialog(props) {
 
   const timer = (
     <>
-      <MuiDialogTitle
-        style={{ backgroundColor: "orange" }}
-        className={classes.header}
-        onClose={closeDialog}
-      >
-        <IconButton
-          aria-label="close"
-          className={classes.backButton}
-          onClick={closeDialog}
-        >
-          <CloseIcon style={{ fontSize: "2rem" }} />
-        </IconButton>
-        <Typography align="center" className={classes.headerText}>
-          <TimerIcon style={{ fontSize: "5rem" }} />
-        </Typography>
-        <Typography align="center" className={classes.headerText}>
-          Timer
-        </Typography>
-      </MuiDialogTitle>
+      <DialogHeader onClose={closeDialog}>
+        <DialogClose onClick={closeDialog} />
+        <TimerIcon className="icon" style={{ fontSize: "5rem" }} />
+        <div className="title">Timer</div>
+      </DialogHeader>
 
-      <MuiDialogContent className={classes.body}>
-        <Typography
-          style={{ padding: "1rem" }}
-          align="center"
-          className={classes.mainText}
-        >
-          Set countdown time
-        </Typography>
+      <DialogContent>
+        <div className="main">Set countdown time</div>
 
-        <Typography style={{ padding: "1rem" }}>
+        <Typography style={{ paddingTop: "2rem" }}>
           <Grid container spacing={1}>
             {[
               "0:30",
@@ -426,46 +385,27 @@ export default function StyledDialog(props) {
               </Grid>
             ))}
             <Grid item xs={4}>
-              <Paper elevation={1} className={classes.paperitem}>
+              <Paper variant="outlined" className={classes.paperitem}>
                 +
               </Paper>
             </Grid>
           </Grid>
         </Typography>
-      </MuiDialogContent>
+      </DialogContent>
     </>
   );
 
-  const task = (
+  const addTask = (
     <>
-      <MuiDialogTitle
-        style={{ backgroundColor: "cornflowerblue" }}
-        className={classes.header}
-        onClose={closeDialog}
-      >
-        <IconButton
-          aria-label="close"
-          className={classes.backButton}
-          onClick={closeDialog}
-        >
-          <CloseIcon style={{ fontSize: "2rem" }} />
-        </IconButton>
-        <Typography align="center" className={classes.headerText}>
-          <AssignmentIcon style={{ fontSize: "5rem" }} />
-        </Typography>
-        <Typography align="center" className={classes.headerText}>
-          Tasks
-        </Typography>
-      </MuiDialogTitle>
+      <DialogHeader onClose={closeDialog}>
+        <DialogClose onClick={closeDialog} />
 
-      <MuiDialogContent className={classes.body}>
-        <Typography
-          style={{ padding: "1rem" }}
-          align="center"
-          className={classes.mainText}
-        >
-          Set a task for your students
-        </Typography>
+        <AssignmentIcon className="icon" />
+        <div className="title">Tasks</div>
+      </DialogHeader>
+
+      <DialogContent>
+        <div className="main">Set a task for your students</div>
 
         <Typography style={{ padding: "1rem" }}>
           <Grid container spacing={1}>
@@ -473,9 +413,9 @@ export default function StyledDialog(props) {
               <Paper
                 style={{
                   textAlign: "center",
-                  backgroundColor: "cornflowerblue",
+                  backgroundColor: "#7a6eaa",
                   color: "white",
-                  border: "1px solid blue",
+                  border: "1px solid #29175f",
                 }}
                 variant="outlined"
                 className={classes.listitem}
@@ -496,45 +436,43 @@ export default function StyledDialog(props) {
             ))}
           </Grid>
         </Typography>
-      </MuiDialogContent>
+      </DialogContent>
     </>
   );
 
   const addNote = (
     <>
-      <MuiDialogTitle
-        style={{ backgroundColor: "steelblue" }}
-        className={classes.header}
-        onClose={closeDialog}
-      >
-        <IconButton
-          aria-label="close"
-          className={classes.backButton}
-          onClick={closeDialog}
-        >
-          <CloseIcon style={{ fontSize: "2rem" }} />
-        </IconButton>
-        <Typography align="center" className={classes.headerText}>
-          <AssignmentIcon style={{ fontSize: "5rem" }} />
-        </Typography>
-        <Typography align="center" className={classes.headerText}>
-          Add note
-        </Typography>
-      </MuiDialogTitle>
+      <DialogHeader onClose={closeDialog}>
+        <DialogClose onClick={closeDialog} />
+        <AssignmentIcon className="icon" style={{ fontSize: "5rem" }} />
+        <div className="title">Add note</div>
+      </DialogHeader>
 
-      <MuiDialogContent className={classes.body}>
-        <Typography
-          style={{ padding: "1rem" }}
-          align="center"
-          className={classes.mainText}
-        >
-          Set a task for your students
+      <DialogContent>
+        <Typography className={classes.addClassSection}>
+          <Box>
+            <TextField
+              rows={7}
+              multiline
+              name="note"
+              //value={newNote}
+              variant="outlined"
+              //onChange={onChangeNewClass}
+              InputProps={{
+                classes: {
+                  input: classes.addClassInput,
+                },
+              }}
+              size="large"
+              fullWidth
+            />
+          </Box>
         </Typography>
 
         <Typography style={{ padding: "1rem" }}>
           <Grid container spacing={1}></Grid>
         </Typography>
-      </MuiDialogContent>
+      </DialogContent>
     </>
   );
 

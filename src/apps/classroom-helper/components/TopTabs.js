@@ -18,11 +18,11 @@ const useStyles = makeStyles({
     textTransform: "capitalize",
     fontSize: "1.3rem",
     fontWeight: "700",
-    color: "#43b3f8",
+    color: "#7a6eaa",
   },
 
   indicator: {
-    backgroundColor: "#43b3f8",
+    backgroundColor: "#7a6eaa",
   },
 
   textColor: {

@@ -92,7 +92,7 @@ export const DisplayGroups = () => {
                 fontSize: "3rem",
                 fontFamily: "Montserrat",
                 fontWeight: "800",
-                color: "steelblue",
+                color: "#7a6eaa",
               }}
             >
               You haven't selected any groups yet

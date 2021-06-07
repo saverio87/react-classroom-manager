@@ -4,7 +4,7 @@ import { ClassroomHelperContext } from "./context/helperContext";
 import Loader from "react-loader-spinner";
 
 // styled components and icons
-import { StyledClassItem } from "./components/StyledComponents";
+import { StyledClassroomItem } from "./components/StyledComponents";
 import StyledDialog from "./components/StyledDialog";
 import ToolBarDialog from "./components/ToolBarDialog";
 
@@ -58,26 +58,27 @@ export const ClassSelect = () => {
           <Grid container spacing={3}>
             {allClasses &&
               allClasses.map((item) => {
-                const { name, students } = item;
+                const { name, students, grade } = item;
                 return (
-                  <Grid item xs={12} lg={3} md={4}>
-                    <StyledClassItem
+                  <Grid item xs={12} lg={4} md={6}>
+                    <StyledClassroomItem
                       onClick={() => setSelectedClass({ ...item })}
                     >
-                      <h3>{name}</h3>
+                      <h2>{name}</h2>
+                      <h3>Grade {grade}</h3>
                       <h4>{students && students.length} students</h4>
                       <h5></h5>
-                    </StyledClassItem>
+                    </StyledClassroomItem>
                   </Grid>
                 );
               })}
-            <Grid item xs={12} lg={3} md={4}>
-              <StyledClassItem>
+            <Grid item xs={12} lg={4} md={6}>
+              <StyledClassroomItem>
                 <AddCircleOutlineIcon
-                  style={{ fontSize: "6rem", color: "#d3d7ec" }}
+                  style={{ fontSize: "10rem", color: "#d3d7ec" }}
                   onClick={() => handleOpen("add-class")}
                 />
-              </StyledClassItem>
+              </StyledClassroomItem>
             </Grid>
           </Grid>
         </Container>

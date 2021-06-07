@@ -30,7 +30,7 @@ const useStyles = makeStyles({
   },
 
   promptdelete: {
-    backgroundColor: "pink",
+    backgroundColor: "mintcream",
     transition: "transform 0.3s ease-in-out",
     transform: "scale3d(0.9, 0.9, 1)",
     "&:hover": { transform: "scale3d(1.05, 1.05, 1)" },

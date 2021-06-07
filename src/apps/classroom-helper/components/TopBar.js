@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ClassroomHelperContext } from "../context/helperContext";
+
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Box, Hidden } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
@@ -10,6 +12,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 const mainLinks = [
   {
     title: "Submit a word",
@@ -25,11 +28,21 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  backArrow: {
+    fontWeight: "900",
+    verticalAlign: "middle",
+    fontSize: "2rem",
+
+    "&:hover": {
+      cursor: "pointer",
+      color: "violet",
+    },
+  },
   menuButton: {
     marginRight: theme.spacing(0),
   },
   appBar: {
-    backgroundColor: "#43b3f8",
+    backgroundColor: "#7a6eaa",
     //#395983 as an alternative
     color: "#f9fafd",
   },
@@ -67,6 +80,10 @@ export default function TopBar({ nameOfClass, studentNumber }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
+  const { selectedClass, setSelectedClass } = useContext(
+    ClassroomHelperContext
+  );
+
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -97,7 +114,11 @@ export default function TopBar({ nameOfClass, studentNumber }) {
                 textDecoration: "none",
               }}
             >
-              &lt; {nameOfClass}
+              <ArrowBackIosIcon
+                className={classes.backArrow}
+                onClick={() => setSelectedClass(false)}
+              />{" "}
+              {nameOfClass}
             </span>
           </Box>
 

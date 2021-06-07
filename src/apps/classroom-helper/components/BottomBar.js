@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "capitalize",
     fontSize: "1.5rem",
     fontWeight: "500",
-    color: "steelblue",
+    color: "#7a6eaa",
 
     transition: theme.transitions.create(["color"], {
       duration: "0.2s",

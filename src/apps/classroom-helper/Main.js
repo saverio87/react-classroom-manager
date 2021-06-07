@@ -16,7 +16,7 @@ import { SubmitClass } from "./SubmitClass";
 
 const useStyles = makeStyles({
   root: {
-    backgroundColor: "#f7f8fe",
+    backgroundColor: "whitesmoke",
     width: "100vw",
   },
   stretch: {

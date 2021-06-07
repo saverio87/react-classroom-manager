@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { Container, Grid, Paper, Box, Typography } from "@material-ui/core";
 import { ClassroomHelperContext } from "../../context/helperContext";
 import { makeStyles } from "@material-ui/core/styles";
+import { NoteItem, NoteItemHeader } from "../StyledComponents";
 import Loader from "react-loader-spinner";
 import { LineBreak, StudentCell } from "../StyledComponents";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
@@ -13,21 +14,7 @@ const useStyles = makeStyles({
   date: {
     fontWeight: "700",
     fontSize: "1.3rem",
-    color: "steelblue",
-  },
-
-  noteItem: {
-    backgroundColor: "white",
-    borderRadius: "2rem",
-    border: "2px solid #43b3f8",
-    padding: "1rem 3rem 1rem 3rem",
-    fontSize: "1.3rem",
-    fontFamily: "Montserrat",
-    fontWeight: 500,
-    color: "black",
-
-    transition: "transform 0.1s ease-in-out",
-    "&:hover": { transform: "scale3d(1.02, 1.02, 1)" },
+    color: "#7a6eaa",
   },
 });
 
@@ -56,56 +43,54 @@ export const TeacherNotes = () => {
     <div className={classes.root}>
       <Container maxWidth="md">
         <LineBreak />
-        <Grid container justify="center" alignItems="center" spacing={2}>
+        <Grid
+          container
+          justify="flex-start"
+          alignItems="flex-start"
+          spacing={2}
+        >
           <Grid item xs={12}>
-            <Paper
-              variant="outlined"
-              className={classes.noteItem}
-              onClick={() => openDialog("add-note")}
-            >
-              <Grid container>
-                <Grid item xs={12}>
-                  <Typography align="center">
-                    <AddCircleOutlineIcon
-                      style={{
-                        fontSize: "3rem",
-                        color: "steelblue",
-                      }}
-                    />
-                  </Typography>
-                </Grid>
-                <Grid item xs={12}>
-                  <Typography
-                    align="center"
-                    style={{ fontSize: "2rem", color: "steelblue" }}
-                  >
-                    Add note
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Paper>
+            <NoteItem onClick={() => openDialog("add-note")}>
+              <h1>
+                <AddCircleOutlineIcon
+                  style={{
+                    fontSize: "5rem",
+                    color: "#7a6eaa",
+
+                    verticalAlign: "middle",
+                  }}
+                />
+              </h1>
+            </NoteItem>
           </Grid>
+        </Grid>
+
+        <Grid container alignItems="stretch" spacing={2}>
           {notes.map((note) => (
-            <Grid item xs={12}>
-              <Paper variant="outlined" className={classes.noteItem}>
-                <Grid container spacing="1">
-                  <Grid item xs={12}>
-                    {note}
-                  </Grid>
+            <Grid item xs={12} lg={4}>
+              <NoteItem>
+                <NoteItemHeader container>
                   <Grid item xs={6}>
-                    <Typography className={classes.date} align="left">
+                    <Typography align="left" className="date">
                       12/02/2018
                     </Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography style={{ color: "steelblue" }} align="right">
-                      <DeleteIcon />
+                    <Typography align="right">
+                      <DeleteIcon className="icon" />
                     </Typography>
                   </Grid>
+                </NoteItemHeader>
+                <Grid container style={{ padding: "1rem" }}>
+                  <span>
+                    {note.length > 150 ? `${note.slice(0, 150)} ...` : note}
+                  </span>
                 </Grid>
-              </Paper>
+              </NoteItem>
             </Grid>
           ))}
+          <LineBreak />
+          <LineBreak />
         </Grid>
       </Container>
       <LineBreak />
