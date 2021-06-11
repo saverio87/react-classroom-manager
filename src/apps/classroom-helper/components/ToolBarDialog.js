@@ -219,11 +219,13 @@ export default function StyledDialog(props) {
 
   // New note
 
-  const [newNote, setNewNote] = useState({
+  const emptyNote = {
     id: uuidv4(),
     date: Date.now(),
     note: "",
-  });
+  };
+
+  const [newNote, setNewNote] = useState(emptyNote);
 
   const { note } = newNote;
 
@@ -234,7 +236,7 @@ export default function StyledDialog(props) {
   const onSubmitNewNote = (e) => {
     e.preventDefault();
     addNote(selectedClass, { ...newNote });
-    setNewNote(initialState);
+    setNewNote(emptyNote);
     closeDialog();
   };
 
