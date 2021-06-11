@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Container, Grid, Paper } from "@material-ui/core";
+import { Container, Grid, Paper, Typography } from "@material-ui/core";
 import { ClassroomHelperContext } from "./context/helperContext";
 import Loader from "react-loader-spinner";
 
@@ -55,7 +55,7 @@ export const ClassSelect = () => {
             paddingTop: "6rem",
           }}
         >
-          <Grid container spacing={3}>
+          <Grid container spacing={3} alignItems="stretch">
             {allClasses &&
               allClasses.map((item) => {
                 const { name, students, grade } = item;
@@ -74,10 +74,19 @@ export const ClassSelect = () => {
               })}
             <Grid item xs={12} lg={4} md={6}>
               <StyledClassroomItem>
-                <AddCircleOutlineIcon
-                  style={{ fontSize: "10rem", color: "#d3d7ec" }}
-                  onClick={() => handleOpen("add-class")}
-                />
+                <Grid
+                  style={{
+                    height: "100%",
+                  }}
+                  container
+                  alignItems="center"
+                  justify="center"
+                >
+                  <AddCircleOutlineIcon
+                    style={{ fontSize: "10rem", color: "#d3d7ec" }}
+                    onClick={() => handleOpen("add-class")}
+                  />
+                </Grid>
               </StyledClassroomItem>
             </Grid>
           </Grid>

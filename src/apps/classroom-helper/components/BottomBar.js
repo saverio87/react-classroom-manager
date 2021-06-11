@@ -12,6 +12,14 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import FullScreen from "./screens/FullScreen";
 
+// Icons
+
+import AssignmentIcon from "@material-ui/icons/Assignment";
+import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
+import FaceIcon from "@material-ui/icons/Face";
+import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
+import TimerIcon from "@material-ui/icons/Timer";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -56,8 +64,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TabPanel() {
   const classes = useStyles();
-  const { pickStudent, selectedClass, pickPair, openDialog, takeAttendance } =
-    useContext(ClassroomHelperContext);
+  const {
+    activeTab,
+    setActiveTab,
+    pickStudent,
+    selectedClass,
+    pickPair,
+    openDialog,
+    takeAttendance,
+  } = useContext(ClassroomHelperContext);
 
   const { students } = selectedClass;
 
@@ -79,29 +94,65 @@ export default function TabPanel() {
           aria-label="icon label tabs example"
         >
           <Tab
-            onClick={() => takeAttendance(students)}
+            onClick={function (e) {
+              if (activeTab !== "classroom") {
+                setActiveTab("classroom");
+              }
+              takeAttendance(students);
+            }}
             className={classes.tab}
-            label="Attendance"
+            label={
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <AssignmentIndIcon fontSize="large" />
+                &nbsp;&nbsp;Attendance
+              </div>
+            }
           />
           <Tab
-            onClick={() => pickStudent(students)}
+            onClick={function (e) {
+              if (activeTab !== "classroom") {
+                setActiveTab("classroom");
+              }
+              pickStudent(students);
+            }}
             className={classes.tab}
-            label="Random"
+            label={
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <FaceIcon fontSize="large" />
+                &nbsp;&nbsp;Random picker
+              </div>
+            }
           />
           <Tab
             onClick={() => openDialog("grouping")}
             className={classes.tab}
-            label="Group students"
+            label={
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <SupervisedUserCircleIcon fontSize="large" />
+                &nbsp;&nbsp;Group students
+              </div>
+            }
           />
+
           <Tab
             onClick={() => openDialog("timer")}
             className={classes.tab}
-            label="Timer"
+            label={
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <TimerIcon fontSize="large" />
+                &nbsp;&nbsp;Timer
+              </div>
+            }
           />
           <Tab
             onClick={() => openDialog("task")}
             className={classes.tab}
-            label="Task"
+            label={
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <AssignmentIcon fontSize="large" />
+                &nbsp;&nbsp;Attendance
+              </div>
+            }
           />
         </Tabs>
       </Paper>

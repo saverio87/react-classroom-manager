@@ -1,12 +1,17 @@
-import React, { useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { getDateFromObject } from "../../utils/getDateFromObject";
 import { Container, Grid, Paper, Box, Typography } from "@material-ui/core";
 import { ClassroomHelperContext } from "../../context/helperContext";
 import { makeStyles } from "@material-ui/core/styles";
 import { NoteItem, NoteItemHeader } from "../StyledComponents";
 import Loader from "react-loader-spinner";
 import { LineBreak, StudentCell } from "../StyledComponents";
+
+// Material icons
+
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import DeleteIcon from "@material-ui/icons/Delete";
+import CloseIcon from "@material-ui/icons/Close";
 
 const useStyles = makeStyles({
   root: {},
@@ -24,12 +29,19 @@ export const TeacherNotes = () => {
     loading,
     selectedClass,
     openDialog,
+    deleteNote,
     toggleAttendance,
     toggleAbsence,
     setAbsentStudents,
   } = useContext(ClassroomHelperContext);
 
   const { notes } = selectedClass;
+  // console.log(notes[0].date.toString());
+
+  const [showNote, setShowNote] = useState({
+    show: false,
+    content: null,
+  });
 
   if (loading) {
     return (
@@ -66,29 +78,73 @@ export const TeacherNotes = () => {
         </Grid>
 
         <Grid container alignItems="stretch" spacing={2}>
-          {notes.map((note) => (
-            <Grid item xs={12} lg={4}>
-              <NoteItem>
+          {showNote.show ? (
+            <Grid item xs={12}>
+              <NoteItem onClick={() => console.log("ciao")}>
                 <NoteItemHeader container>
-                  <Grid item xs={6}>
+                  <Grid item xs={9}>
                     <Typography align="left" className="date">
-                      12/02/2018
+                      {getDateFromObject(showNote.content.date)}
                     </Typography>
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={3}>
                     <Typography align="right">
-                      <DeleteIcon className="icon" />
+                      <CloseIcon
+                        className="icon"
+                        onClick={() =>
+                          setShowNote({
+                            ...showNote,
+                            show: false,
+                            content: null,
+                          })
+                        }
+                      />
                     </Typography>
                   </Grid>
                 </NoteItemHeader>
                 <Grid container style={{ padding: "1rem" }}>
-                  <span>
-                    {note.length > 150 ? `${note.slice(0, 150)} ...` : note}
-                  </span>
+                  <span>{showNote.content.note}</span>
                 </Grid>
               </NoteItem>
             </Grid>
-          ))}
+          ) : (
+            notes.map((note) => (
+              <>
+                <Grid item xs={12} lg={4}>
+                  <NoteItem>
+                    <NoteItemHeader container>
+                      <Grid item xs={9}>
+                        <Typography align="left" className="date">
+                          {getDateFromObject(note.date)}
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={3}>
+                        <Typography align="right">
+                          <DeleteIcon
+                            className="icon"
+                            onClick={() => deleteNote(selectedClass, note)}
+                          />
+                        </Typography>
+                      </Grid>
+                    </NoteItemHeader>
+                    <Grid
+                      onClick={() =>
+                        setShowNote({ ...showNote, show: true, content: note })
+                      }
+                      container
+                      style={{ padding: "1rem" }}
+                    >
+                      <span>
+                        {note.note.length > 150
+                          ? `${note.note.slice(0, 150)} ...`
+                          : note.note}
+                      </span>
+                    </Grid>
+                  </NoteItem>
+                </Grid>
+              </>
+            ))
+          )}
           <LineBreak />
           <LineBreak />
         </Grid>

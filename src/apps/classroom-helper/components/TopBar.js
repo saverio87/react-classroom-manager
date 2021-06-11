@@ -80,7 +80,7 @@ export default function TopBar({ nameOfClass, studentNumber }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
-  const { selectedClass, setSelectedClass } = useContext(
+  const { setSelectedClass, setStudentGroups } = useContext(
     ClassroomHelperContext
   );
 
@@ -116,7 +116,10 @@ export default function TopBar({ nameOfClass, studentNumber }) {
             >
               <ArrowBackIosIcon
                 className={classes.backArrow}
-                onClick={() => setSelectedClass(false)}
+                onClick={function (e) {
+                  setSelectedClass(false);
+                  setStudentGroups(false);
+                }}
               />{" "}
               {nameOfClass}
             </span>

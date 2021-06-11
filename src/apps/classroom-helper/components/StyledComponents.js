@@ -11,7 +11,7 @@ import CloseIcon from "@material-ui/icons/Close";
 const StyledDialogHeader = styled(MuiDialogTitle)((props) => ({
   borderRadius: "2rem 2rem 0rem 0rem",
   backgroundColor: "#7a6eaa",
-  border: "1px solid #29175f",
+  border: "3px solid whitesmoke",
   padding: "2rem 2rem 2rem 2rem",
   textAlign: "center",
 
@@ -49,11 +49,13 @@ const StyledDialogContent = styled(MuiDialogContent)((props) => ({
 
 const ClassroomItem = styled(Paper)((props) => ({
   //borderWidth: "0.1rem 0rem 0.1rem 0rem",
+  height: "100%",
+
   backgroundColor: "whitesmoke",
   borderRadius: "2rem",
   border: "2px solid #7a6eaa",
   boxShadow: "0px 3px 1px 3px #f3f3f8",
-  padding: "2rem",
+  padding: "0rem 1.5rem 0rem 1.5rem",
   textAlign: "center",
   //#d3d7ec
   [props.theme.breakpoints.down("sm")]: {

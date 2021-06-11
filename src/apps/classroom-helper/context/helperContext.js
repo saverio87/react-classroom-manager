@@ -1,3 +1,4 @@
+import { NoteRounded } from "@material-ui/icons";
 import React, { createContext, useState, useEffect } from "react";
 import firebase from "../../../firebase";
 
@@ -7,6 +8,7 @@ const ClassroomHelperProvider = ({ children }) => {
   // Initializing states
 
   const [allClasses, setAllClasses] = useState();
+  const [studentGroups, setStudentGroups] = useState();
   const [selectedClass, setSelectedClass] = useState();
   const [absentStudents, setAbsentStudents] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -23,8 +25,6 @@ const ClassroomHelperProvider = ({ children }) => {
   const [activeTab, setActiveTab] = useState("classroom");
   const [toggleAttendance, setToggleAttendance] = useState(false);
   const [timer, setTimer] = useState(0);
-
-  const [studentGroups, setStudentGroups] = useState();
 
   // Fetch all classrooms data from database
 
@@ -46,7 +46,7 @@ const ClassroomHelperProvider = ({ children }) => {
     });
   };
 
-  // Classrooms and students CRUD operations
+  // Classrooms, students, notes, etc. CRUD operations
 
   const addClassroom = (newClassroom) => {
     classList
@@ -79,6 +79,46 @@ const ClassroomHelperProvider = ({ children }) => {
     // redirecting to 'classroom' tab
 
     setActiveTab("classroom");
+  };
+
+  const addNote = (classroom, note) => {
+    classList
+      .doc(classroom.id)
+      .update({ notes: firebase.firestore.FieldValue.arrayUnion(note) })
+      .catch((err) => {
+        console.error(err);
+      });
+
+    // updating selectedClass state
+
+    classList.onSnapshot((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        if (doc.id === classroom.id) {
+          const updatedClass = { ...doc.data() };
+          setSelectedClass(doc.data());
+        }
+      });
+    });
+  };
+
+  const deleteNote = (classroom, note) => {
+    classList
+      .doc(classroom.id)
+      .update({ notes: firebase.firestore.FieldValue.arrayRemove(note) })
+      .catch((err) => {
+        console.error(err);
+      });
+
+    // updating selectedClass state
+
+    classList.onSnapshot((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        if (doc.id === classroom.id) {
+          const updatedClass = { ...doc.data() };
+          setSelectedClass(doc.data());
+        }
+      });
+    });
   };
 
   // Dialog handler
@@ -220,6 +260,8 @@ const ClassroomHelperProvider = ({ children }) => {
           addClassroom,
           getClasses,
           addStudents,
+          addNote,
+          deleteNote,
           // Dialog handler
           openDialog,
           closeDialog,

@@ -128,6 +128,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    "&:hover": {
+      backgroundColor: "ghostwhite",
+      cursor: "pointer",
+    },
   },
   listitem: {
     borderRadius: "0.5rem",
@@ -143,6 +147,7 @@ export default function StyledDialog(props) {
     allClasses,
     addStudents,
     addClassroom,
+    addNote,
     // States
     selectedClass,
     setSelectedClass,
@@ -212,12 +217,35 @@ export default function StyledDialog(props) {
     closeDialog();
   };
 
+  // New note
+
+  const [newNote, setNewNote] = useState({
+    id: uuidv4(),
+    date: Date.now(),
+    note: "",
+  });
+
+  const { note } = newNote;
+
+  const onChangeNewNote = (event) => {
+    setNewNote({ ...newNote, [event.target.name]: event.target.value });
+  };
+
+  const onSubmitNewNote = (e) => {
+    e.preventDefault();
+    addNote(selectedClass, { ...newNote });
+    setNewNote(initialState);
+    closeDialog();
+  };
+
   const classes = useStyles();
 
   function renderDialog() {
     // Destructuring the state object 'dialogOpen'
     const { content } = dialogOpen;
     switch (content) {
+      case "note":
+        return showNote;
       case "add-class":
         return addClass;
       case "timer":
@@ -227,7 +255,7 @@ export default function StyledDialog(props) {
       case "grouping":
         return groups;
       case "add-note":
-        return addNote;
+        return addNewNote;
       case "add-students":
         return addStudentsToClass;
       default:
@@ -440,11 +468,11 @@ export default function StyledDialog(props) {
     </>
   );
 
-  const addNote = (
+  const addNewNote = (
     <>
       <DialogHeader onClose={closeDialog}>
         <DialogClose onClick={closeDialog} />
-        <AssignmentIcon className="icon" style={{ fontSize: "5rem" }} />
+        <AssignmentIcon className="icon" style={{ fontSize: "7rem" }} />
         <div className="title">Add note</div>
       </DialogHeader>
 
@@ -455,9 +483,9 @@ export default function StyledDialog(props) {
               rows={7}
               multiline
               name="note"
-              //value={newNote}
+              value={note}
               variant="outlined"
-              //onChange={onChangeNewClass}
+              onChange={onChangeNewNote}
               InputProps={{
                 classes: {
                   input: classes.addClassInput,
@@ -469,8 +497,10 @@ export default function StyledDialog(props) {
           </Box>
         </Typography>
 
-        <Typography style={{ padding: "1rem" }}>
-          <Grid container spacing={1}></Grid>
+        <Typography align="center" style={{ paddingTop: "1rem" }}>
+          <StyledButton onClick={(e) => onSubmitNewNote(e)}>
+            Submit students
+          </StyledButton>
         </Typography>
       </DialogContent>
     </>
@@ -478,27 +508,17 @@ export default function StyledDialog(props) {
 
   const addStudentsToClass = (
     <>
-      <MuiDialogTitle
-        style={{ backgroundColor: "indigo" }}
-        className={classes.header}
-        onClose={closeDialog}
-      >
-        <IconButton
-          aria-label="close"
-          className={classes.backButton}
-          onClick={closeDialog}
-        >
-          <CloseIcon style={{ fontSize: "2rem" }} />
-        </IconButton>
-        <Typography align="center" className={classes.headerText}>
-          <FontAwesomeIcon style={{ fontSize: "5rem" }} icon={faUserGraduate} />
-        </Typography>
-        <Typography align="center" className={classes.headerText}>
-          Add students
-        </Typography>
-      </MuiDialogTitle>
+      <DialogHeader onClose={closeDialog}>
+        <DialogClose onClick={closeDialog} />
+        <FontAwesomeIcon
+          className="icon"
+          style={{ fontSize: "7rem" }}
+          icon={faUserGraduate}
+        />
+        <div className="title">Add students</div>
+      </DialogHeader>
 
-      <MuiDialogContent className={classes.body}>
+      <DialogContent>
         <Typography style={{ padding: "1rem", align: "center" }}>
           <TextField
             InputProps={{
@@ -522,7 +542,22 @@ export default function StyledDialog(props) {
             Submit students
           </StyledButton>
         </Typography>
-      </MuiDialogContent>
+      </DialogContent>
+    </>
+  );
+
+  const showNote = (
+    <>
+      <Paper
+        style={{
+          borderRadius: "2rem",
+          border: "1px solid violet",
+          padding: "2rem",
+        }}
+        onClose={closeDialog}
+      >
+        Prova
+      </Paper>
     </>
   );
 
