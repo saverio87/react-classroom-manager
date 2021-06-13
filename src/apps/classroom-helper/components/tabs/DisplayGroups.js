@@ -33,29 +33,6 @@ export const DisplayGroups = () => {
     ClassroomHelperContext
   );
 
-  const [groupColor, setGroupColor] = useState([]);
-
-  function getRandomColor(groups) {
-    let letters = "0123456789ABCDEF";
-
-    let colors = [];
-
-    for (let i = 0; i < groups.length; i++) {
-      let color = "#";
-      for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      colors.push(color);
-    }
-
-    setGroupColor(colors);
-    console.log(groupColor);
-  }
-
-  useEffect(() => {
-    studentGroups && getRandomColor(studentGroups);
-  }, []);
-
   if (loading) {
     return (
       <Grid container justify="center" alignItems="center">
@@ -63,6 +40,33 @@ export const DisplayGroups = () => {
       </Grid>
     );
   }
+
+  // If no students have been added
+
+  if (selectedClass.students.length < 1) {
+    return (
+      <Container maxWidth="lg">
+        <LineBreak />
+        <Grid container alignItems="center">
+          <Grid item xs={12}>
+            <Typography
+              align="center"
+              style={{
+                fontSize: "3rem",
+                fontFamily: "Montserrat",
+                fontWeight: "800",
+                color: "#7a6eaa",
+              }}
+            >
+              You need to add some students first
+            </Typography>
+          </Grid>
+        </Grid>
+      </Container>
+    );
+  }
+
+  // If no groups have been selected
 
   if (!studentGroups) {
     return (

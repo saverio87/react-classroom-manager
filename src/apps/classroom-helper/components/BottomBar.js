@@ -114,6 +114,10 @@ export default function TabPanel() {
               if (activeTab !== "classroom") {
                 setActiveTab("classroom");
               }
+              if (students.length < 1) {
+                alert("Add some students first!");
+                return;
+              }
               pickStudent(students);
             }}
             className={classes.tab}
