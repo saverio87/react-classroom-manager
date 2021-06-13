@@ -89,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   addClassInput: {
-    fontSize: "2rem",
+    fontSize: "1.5rem",
     color: "#7a6eaa",
     fontWeight: "400",
     lineHeight: "2.2rem",
@@ -246,8 +246,6 @@ export default function StyledDialog(props) {
     // Destructuring the state object 'dialogOpen'
     const { content } = dialogOpen;
     switch (content) {
-      case "note":
-        return showNote;
       case "add-class":
         return addClass;
       case "timer":
@@ -501,7 +499,7 @@ export default function StyledDialog(props) {
 
         <Typography align="center" style={{ paddingTop: "1rem" }}>
           <StyledButton onClick={(e) => onSubmitNewNote(e)}>
-            Submit students
+            Add note
           </StyledButton>
         </Typography>
       </DialogContent>

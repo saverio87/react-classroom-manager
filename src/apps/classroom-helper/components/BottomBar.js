@@ -49,10 +49,11 @@ const useStyles = makeStyles((theme) => ({
     color: "#7a6eaa",
 
     transition: theme.transitions.create(["color"], {
-      duration: "0.2s",
+      duration: "1s",
     }),
     "&:hover": {
-      backgroundColor: "whitesmoke",
+      backgroundColor: "ghostwhite",
+      fontWeight: "700",
     },
   },
 
@@ -104,7 +105,7 @@ export default function TabPanel() {
             label={
               <div style={{ display: "flex", alignItems: "center" }}>
                 <AssignmentIndIcon fontSize="large" />
-                &nbsp;&nbsp;Attendance
+                <Hidden mdDown>&nbsp;&nbsp;Attendance</Hidden>
               </div>
             }
           />
@@ -119,7 +120,7 @@ export default function TabPanel() {
             label={
               <div style={{ display: "flex", alignItems: "center" }}>
                 <FaceIcon fontSize="large" />
-                &nbsp;&nbsp;Random picker
+                <Hidden mdDown>&nbsp;&nbsp;Random picker</Hidden>
               </div>
             }
           />
@@ -129,7 +130,7 @@ export default function TabPanel() {
             label={
               <div style={{ display: "flex", alignItems: "center" }}>
                 <SupervisedUserCircleIcon fontSize="large" />
-                &nbsp;&nbsp;Group students
+                <Hidden mdDown>&nbsp;&nbsp;Group students</Hidden>
               </div>
             }
           />
@@ -140,7 +141,7 @@ export default function TabPanel() {
             label={
               <div style={{ display: "flex", alignItems: "center" }}>
                 <TimerIcon fontSize="large" />
-                &nbsp;&nbsp;Timer
+                <Hidden mdDown>&nbsp;&nbsp;Timer</Hidden>
               </div>
             }
           />
@@ -150,7 +151,7 @@ export default function TabPanel() {
             label={
               <div style={{ display: "flex", alignItems: "center" }}>
                 <AssignmentIcon fontSize="large" />
-                &nbsp;&nbsp;Attendance
+                <Hidden mdDown>&nbsp;&nbsp;Tasks</Hidden>
               </div>
             }
           />

@@ -11,7 +11,7 @@ import CloseIcon from "@material-ui/icons/Close";
 
 // Material UI core
 
-import { Paper, Grid } from "@material-ui/core";
+import { Paper, Grid, Box } from "@material-ui/core";
 import { ClassroomHelperContext } from "../../context/helperContext";
 
 import { Dialog, IconButton, Typography } from "@material-ui/core";
@@ -50,16 +50,16 @@ const useStyles = makeStyles((theme) => ({
   // Groups screen
 
   groupItem: {
-    paddingTop: "1rem",
-    border: "0.5rem solid darkgreen",
+    padding: "1rem",
+    border: "0.5rem solid #29175f",
     borderRadius: "2rem",
-    padding: "0rem",
+
     fontSize: "1.8rem",
   },
 
   groupTitle: {
     fontSize: "1.8rem",
-    color: "darkgreen",
+    color: "#29175f",
     fontWeight: "800",
     fontFamily: "Montserrat",
   },
@@ -100,7 +100,7 @@ export default function FullScreen(props) {
   const groupsBody = (
     <div
       style={{
-        backgroundColor: "green",
+        backgroundColor: "#7a6eaa",
       }}
       className={classes.body}
     >
@@ -120,23 +120,17 @@ export default function FullScreen(props) {
         <Grid container spacing={2} justify="center">
           {studentGroups &&
             studentGroups.map((group, key) => (
-              <Grid item xl={2} lg={3} md={4} sm={6} xs={12}>
+              <Grid item lg={2} md={3} sm={4} xs={12}>
                 <Paper variant="outlined" className={classes.groupItem}>
                   <Typography align="center" className={classes.groupTitle}>
                     Group {key + 1}
                   </Typography>
-                  <ul>
+
+                  <Typography style={{ fontSize: "2rem" }} align="center">
                     {group.map((student) => (
-                      <li
-                        style={{ lineHeight: "2.5rem", listStyleType: "none" }}
-                      >
-                        {" "}
-                        <FaceIcon />
-                        {"  "}
-                        {student}
-                      </li>
+                      <Box>{student}</Box>
                     ))}
-                  </ul>
+                  </Typography>
                 </Paper>
               </Grid>
             ))}
@@ -149,7 +143,7 @@ export default function FullScreen(props) {
   const timerBody = (
     <div
       style={{
-        background: "linear-gradient(darkorange, orange)",
+        backgroundColor: "#7a6eaa",
       }}
       className={classes.body}
     >

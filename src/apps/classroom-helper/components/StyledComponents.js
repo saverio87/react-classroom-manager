@@ -128,7 +128,7 @@ const StyledNoteItemHeader = styled(Grid)((props) => ({
   backgroundColor: "#d3d7ec",
   padding: "1rem",
 
-  "& .date, .icon": {
+  "& .date, .icon, .title": {
     fontFamily: "Montserrat",
     fontWeight: 700,
     color: "#7a6eaa",

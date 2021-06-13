@@ -132,7 +132,10 @@ export const TeacherNotes = () => {
                         setShowNote({ ...showNote, show: true, content: note })
                       }
                       container
-                      style={{ padding: "1rem" }}
+                      style={{
+                        padding: "1rem",
+                        height: "100%",
+                      }}
                     >
                       <span>
                         {note.note.length > 150

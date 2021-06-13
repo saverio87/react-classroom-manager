@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     width: "100vw",
   },
   stretch: {
-    minHeight: "90vh",
+    minHeight: "80vh",
     width: "100%",
   },
 });

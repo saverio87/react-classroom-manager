@@ -6,19 +6,15 @@ import Loader from "react-loader-spinner";
 import { LineBreak, StudentCell } from "../StyledComponents";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 
+import { NoteItem, NoteItemHeader } from "../StyledComponents";
+
 const useStyles = makeStyles({
   root: {},
-
-  date: {
-    fontWeight: "700",
-    fontSize: "1.3rem",
-    color: "darkgrey",
-  },
 
   groupName: {
     fontSize: "1.5rem",
     fontWeight: "700",
-    color: "steelblue",
+
     padding: "0.5rem 0rem 0.5rem 0rem",
   },
 
@@ -28,18 +24,6 @@ const useStyles = makeStyles({
     border: "3px solid #43b3f8",
     fontSize: "1.1rem",
     fontWeight: "500",
-  },
-
-  noteItem: {
-    backgroundColor: "white",
-    borderRadius: "2rem",
-    border: "2px solid #e2e4f2",
-    padding: "1rem 3rem 1rem 3rem",
-    fontSize: "1.3rem",
-    fontFamily: "Montserrat",
-
-    transition: "transform 0.1s ease-in-out",
-    "&:hover": { transform: "scale3d(1.02, 1.02, 1)" },
   },
 });
 
@@ -106,27 +90,57 @@ export const DisplayGroups = () => {
   return (
     <div className={classes.root}>
       <Container maxWidth="lg">
-        <Grid container alignItems="center" spacing={2}>
+        <Grid
+          container
+          style={{ padding: "2rem 0rem 2rem 0rem" }}
+          alignItems="flex-start"
+          spacing={2}
+        >
           {studentGroups &&
             studentGroups.map((group, key) => (
               <Grid item xs={12} md={3} lg={2}>
-                <Typography align="center" className={classes.groupName}>
-                  Group {key + 1}
-                </Typography>
-                <Grid container spacing="1">
-                  {group.map((student, index) => (
+                <NoteItem>
+                  <NoteItemHeader container>
                     <Grid item xs={12}>
-                      <Paper
-                        className={classes.student}
-                        variant="outlined"
-                        style={{ backgroundColor: "white" }}
-                      >
-                        {student}
-                      </Paper>
+                      <Typography align="left" className="title">
+                        Group {key + 1}
+                      </Typography>
                     </Grid>
-                  ))}
-                </Grid>
+                  </NoteItemHeader>
+                  <Grid
+                    container
+                    style={{
+                      padding: "1rem",
+                      height: "100%",
+                    }}
+                  >
+                    {group.map((student, index) => (
+                      <Grid item xs={12}>
+                        <span>{student}</span>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </NoteItem>
               </Grid>
+
+              // <Grid item xs={12} md={3} lg={2}>
+              //   <Typography align="center" className={classes.groupName}>
+              //     Group {key + 1}
+              //   </Typography>
+              //   <Grid container spacing="1">
+              //     {group.map((student, index) => (
+              //       <Grid item xs={12}>
+              //         <Paper
+              //           className={classes.student}
+              //           variant="outlined"
+              //           style={{ backgroundColor: "white" }}
+              //         >
+              //           {student}
+              //         </Paper>
+              //       </Grid>
+              //     ))}
+              //   </Grid>
+              // </Grid>
             ))}
         </Grid>
       </Container>
